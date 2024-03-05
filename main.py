@@ -32,7 +32,7 @@ class UserInfo(BaseModel):
 @users.get("/", response_model=UserInfo)
 async def get_user():
     """Get user info"""
-    return UserInfo("user", "user@email.com") 
+    return UserInfo(name="user", email="user@email.com")
 
 
 @users.post("/", response_model=UserInfo)
@@ -47,7 +47,7 @@ async def post_user(user: UserInfo, response: Response):
         httponly=True,
         max_age=3600,
     )
-    return UserInfo("user", "user@email.com") 
+    return user
 
 
 @users.post("test/", response_model=UserInfo)
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=8000,
+        port=80,
         log_level="info",
         # ssl_keyfile="",
         # ssl_certfile="",
